@@ -1,0 +1,55 @@
+// 3 10 tinh theo khoang
+// 2 for 
+
+import java.util.Scanner;
+
+public class BlackJack {
+    public static void main(String[] args) {
+        Scanner cre = new Scanner(System.in);
+        System.out.print("Nhap N= ");
+        int T = cre.nextInt();
+        char[] a = new char[T];
+        char[] b = new char[T];
+        for (int i = 0; i < T; i++) {
+            System.out.printf("a[%d]= ", i);
+            a[i] = cre.next().charAt(0);
+            System.out.printf("b[%d]= ", i);
+            b[i] = cre.next().charAt(0);
+        }
+        int[] total = new int[T];
+        for (int i = 0; i < T; i++) {
+            total[i] = 0;
+            if (a[i] == 'A') {
+                if (b[i] == 'K' || b[i] == 'Q' || b[i] == 'J')
+                { total[i] = 21;}
+                else{ total[i] = Character.getNumericValue(b[i]) + 11;}
+            } else if (b[i] == 'A') {
+                if (a[i] == 'K' || a[i] == 'Q' || a[i] == 'J')
+                {total[i] = 21;}
+                else{total[i] = Character.getNumericValue(a[i]) + 11;}
+            } else if (a[i] == 'A' && b[i] == 'A') {
+                total[i] = 21;
+            } else if (b[i] == 'K' || b[i] == 'Q' || b[i] == 'J') {
+                total[i] = Character.getNumericValue(a[i]) + 10;
+            } else if (a[i] == 'K' || a[i] == 'Q' || a[i] == 'J') {
+                total[i] = Character.getNumericValue(b[i]) + 10;
+            } else {
+                total[i] = Character.getNumericValue(a[i]) + Character.getNumericValue(b[i]);
+            }
+        }
+        for (int i = 0; i < T; i++) {
+            if (total[i] == 21) {
+                System.out.print("BlackJack");
+            } else if (total[i] < 21) {
+                if (total[i] + 11 < 21) {
+                    System.out.println(total[i] + 11);
+                } else if ((total[i] + 10) == 21) {
+                    System.out.println(total[i] + 10);
+                } else if ((total[i] + 10) > 21) {
+                    System.out.println(21);}
+                }else if (total[i] + 10 < 21) {
+                    System.out.println(total[i] + 10);
+            }
+        }
+    }
+}
